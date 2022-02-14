@@ -33,10 +33,16 @@ const server = http.createServer((req, res) => {
       const parsedBody = Buffer.concat(body).toString();
       console.log(parsedBody.split("=")[1]); // username=whatever-the-user-entered
       username = parsedBody.split("=")[1];
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "text/html");
+      res.write("<html>");
+      res.write("<head><title>Assignment 1</title></head>");
+      res.write("<body><h2>Username</h2>");
+      res.write(`<p>${username}</p>`);
+      res.write("</body>");
+      res.write("</html>");
+      res.end();
     });
-    res.statusCode = 302;
-    res.setHeader("Location", "/");
-    res.end();
   }
 });
 
